@@ -56,7 +56,6 @@
             letter-spacing: 1px;
         }
 
-        /* Confetti container */
         .confetti {
             position: absolute;
             width: 5px;
@@ -65,7 +64,6 @@
             animation: fall linear infinite;
         }
 
-        /* Confetti animation */
         @keyframes fall {
             from {
                 transform: translateY(-100vh) rotate(0deg);
@@ -86,23 +84,19 @@
         <div class="gift-text">Click Here!</div>
     </a>
 
-    <!-- Confetti and Flash Script -->
     <script>
         function showEffects(event) {
-            event.preventDefault(); // Prevents immediate redirection
+            event.preventDefault(); 
 
             const giftBox = document.getElementById('giftBox');
 
-            // Temporarily change background to yellow for flash effect
             giftBox.style.backgroundColor = "yellow";
 
-            // Reset background to original after flash effect
             setTimeout(() => {
                 giftBox.style.backgroundColor = "";
                 giftBox.style.backgroundImage = "url('https://media1.tenor.com/m/t7aI5VVWTvwAAAAC/gift-christmas-gift.gif')";
-            }, 500); // Increased flash duration for visibility
+            }, 500); 
 
-            // Show confetti effect
             const body = document.body;
             const confettiColors = ['#ff69b4', '#ffb6c1', '#ffd700', '#00ced1', '#40e0d0'];
 
@@ -111,14 +105,11 @@
                 confetti.classList.add('confetti');
                 confetti.style.left = Math.random() * window.innerWidth + 'px';
                 confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Random fall speed
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 body.appendChild(confetti);
 
-                // Remove confetti after animation
                 setTimeout(() => confetti.remove(), 3000);
             }
-
-            // Redirect after the flash effect and confetti animation
             setTimeout(() => {
                 window.location.href = 'test.html';
             }, 2000);
