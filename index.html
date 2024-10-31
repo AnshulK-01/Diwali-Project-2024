@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Box Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .header-text {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .gift-box {
+            width: 300px;
+            height: 300px;
+            background-image: url('https://media1.tenor.com/m/t7aI5VVWTvwAAAAC/gift-christmas-gift.gif');
+            background-size: cover;
+            border: 5px solid #ff9900;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .gift-text {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* Confetti container */
+        .confetti {
+            position: absolute;
+            width: 5px;
+            height: 15px;
+            background-color: #ff69b4;
+            animation: fall linear infinite;
+        }
+
+        /* Confetti animation */
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-text">Open It.</div>
+
+    <a href="test.html" class="gift-box" id="giftBox" onclick="showEffects(event)">
+        <div class="gift-text">Click Here!</div>
+    </a>
+
+    <!-- Confetti and Flash Script -->
+    <script>
+        function showEffects(event) {
+            event.preventDefault(); // Prevents immediate redirection
+
+            const giftBox = document.getElementById('giftBox');
+
+            // Temporarily change background to yellow for flash effect
+            giftBox.style.backgroundColor = "yellow";
+
+            // Reset background to original after flash effect
+            setTimeout(() => {
+                giftBox.style.backgroundColor = "";
+                giftBox.style.backgroundImage = "url('https://media1.tenor.com/m/t7aI5VVWTvwAAAAC/gift-christmas-gift.gif')";
+            }, 500); // Increased flash duration for visibility
+
+            // Show confetti effect
+            const body = document.body;
+            const confettiColors = ['#ff69b4', '#ffb6c1', '#ffd700', '#00ced1', '#40e0d0'];
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Random fall speed
+                body.appendChild(confetti);
+
+                // Remove confetti after animation
+                setTimeout(() => confetti.remove(), 3000);
+            }
+
+            // Redirect after the flash effect and confetti animation
+            setTimeout(() => {
+                window.location.href = 'test.html';
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
